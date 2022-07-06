@@ -1,4 +1,6 @@
 import { DataSource } from "typeorm"
+import { Category } from "../modules/cars/entities/Category";
+import { CreateCategories1654087906109 } from "./migrations/1654087906109-CreateCategories";
 
 export const AppDataSource = new DataSource({
     type: "postgres",
@@ -7,15 +9,13 @@ export const AppDataSource = new DataSource({
     username: "docker",
     password: "ignite",
     database: "rentx",
-    synchronize: true,
+    synchronize: false,
     logging: true,
-    entities: ["./src/modules/**/entities/*.ts"],
-    migrations: ["./src/database/migrations/*.ts"],
+    entities: [Category],
+    migrations: [CreateCategories1654087906109],
     subscribers: [],
 })
 
-export function createConnection(host = "localhost"): Promise<DataSource> {
+export function createConnection(host = "database"): Promise<DataSource> {
     return AppDataSource.setOptions({ host }).initialize();
 }
-
-export default AppDataSource;
