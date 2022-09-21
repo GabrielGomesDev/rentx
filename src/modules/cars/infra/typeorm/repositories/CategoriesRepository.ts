@@ -3,10 +3,10 @@
 ** Instanciado via método getInstance() para evitar que o repositório seja reiniciado quando instanciado.
 **/
 
+import { AppDataSource } from "@shared/infra/typeorm/data-source";
+import { ICategoriesRepository, ICreateCategoryDTO } from "@modules/cars/repositories/ICategoriesRepository";
 import { Repository } from "typeorm";
-import { AppDataSource } from "../../../../database/data-source";
-import { Category } from "../../entities/Category";
-import { ICategoriesRepository, ICreateCategoryDTO } from "../ICategoriesRepository";
+import { Category } from "../entities/Category";
 
 class CategoriesRepository implements ICategoriesRepository {
     private repository: Repository<Category>;
