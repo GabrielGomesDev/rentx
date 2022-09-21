@@ -1,5 +1,5 @@
-import { categoriesRoutes } from "../../../../routes/categories.routes";
-import { Category } from "../../entities/Category";
+import { categoriesRoutes } from "../../../../shared/infra/http/routes/categories.routes";
+import { Category } from "../../infra/typeorm/entities/Category";
 import { ICategoriesRepository, ICreateCategoryDTO } from "../ICategoriesRepository";
 
 class CategoriesRepositoryInMemory implements ICategoriesRepository {
