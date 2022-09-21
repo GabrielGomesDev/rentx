@@ -1,8 +1,8 @@
 import { inject, injectable } from "tsyringe";
-import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
-import { IUsersRepository } from "../../repositories/IUsersRepository";
+import { ICreateUserDTO } from "@modules/accounts/dtos/ICreateUserDTO";
+import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
 import { hash } from "bcryptjs";
-import { AppError } from "../../../../errors/AppError";
+import { AppError } from "@errors/AppError";
 
 @injectable()
 class CreateUserUseCase {
@@ -10,11 +10,11 @@ class CreateUserUseCase {
     constructor(
         @inject("UsersRepository")
         private userRepository: IUsersRepository
-    ){}
+    ) { }
 
-    async execute({name, password, email, driver_license}: ICreateUserDTO): Promise<void> {
+    async execute({ name, password, email, driver_license }: ICreateUserDTO): Promise<void> {
 
-        const userAlreadyExists = this.userRepository.findByEmail(email);
+        const userAlreadyExists = await this.userRepository.findByEmail(email);
 
         if (userAlreadyExists) {
             throw new AppError("User already exists", 400);

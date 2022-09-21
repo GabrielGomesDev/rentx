@@ -4,11 +4,11 @@ import "express-async-errors";
 import swaggerUi from "swagger-ui-express";
 
 import { createConnection } from "./database/data-source";
-import "./shared/container";
+import "@shared/container";
 
 import swaggerFile from "./swagger.json";
 import { router } from "./routes";
-import { AppError } from "./errors/AppError";
+import { AppError } from "@errors/AppError";
 
 
 createConnection();
@@ -21,7 +21,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 app.use(router);
 
-app.use((err: Error, request: Request, response: Response, next: NextFunction)=> {
+app.use((err: Error, request: Request, response: Response, next: NextFunction) => {
     if (err instanceof AppError) {
         return response.status(err.statusCode).json({
             message: err.message
